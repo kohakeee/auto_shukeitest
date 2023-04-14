@@ -98,8 +98,8 @@ def main():
             st.write(grouped2_total)
 
             # Plotlyで棒グラフを作成
-            fig_grouped2 = go.Figure(go.Bar(x=grouped2.index, y=grouped2['売上本体金額']))
-            st.plotly_chart(fig_grouped2)
+            #fig_grouped2 = go.Figure(go.Bar(x=grouped2.index, y=grouped2['売上本体金額']))
+            #st.plotly_chart(fig_grouped2)
             
         with st.expander("仕入集計結果(商品仕入6)"):
             st.write(grouped1)
@@ -204,31 +204,31 @@ def main():
         st.write("大阪まとめ:")
         st.write(result1)
 
-        # 新しいデータフレームを作成
-        result = pd.DataFrame(columns=["管理部門", "売上本体金額", "仕入本体金額", "売上原価"])
+        ## 新しいデータフレームを作成
+        #result = pd.DataFrame(columns=["管理部門", "売上本体金額", "仕入本体金額", "売上原価"])
 
-        # 各データの集計結果を算出
+        ## 各データの集計結果を算出
       
 
-        # 東京データをまとめる
-        tokyo_data = [tokyo_total, tokyo1_total, tokyo2_total, promotion_total, overseas_total, chu1_total, chu2_total]
-        tokyo_index = ["東京支店", "東京営業1課", "東京営業2課", "販売促進課", "海外営業課", "中部営業1課", "中部営業2課"]
+        ## 東京データをまとめる
+        #tokyo_data = [tokyo_total, tokyo1_total, tokyo2_total, promotion_total, overseas_total, chu1_total, chu2_total]
+        #tokyo_index = ["東京支店", "東京営業1課", "東京営業2課", "販売促進課", "海外営業課", "中部営業1課", "中部営業2課"]
 
-        for i, total in enumerate(tokyo_data):
-            result = result.append({"管理部門": tokyo_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
+        #for i, total in enumerate(tokyo_data):
+            #result = result.append({"管理部門": tokyo_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
 
-        st.write("東京まとめ:")
-        st.write(result)
+        #st.write("東京まとめ:")
+        #st.write(result)
 
-        # 大阪データをまとめる
-        osaka_data = [osaka_total, osaka1_total, osaka2_total, oita_total]
-        osaka_index = ["大阪支店", "大阪営業1課", "大阪営業2課", "大分出張所"]
+        ## 大阪データをまとめる
+        #osaka_data = [osaka_total, osaka1_total, osaka2_total, oita_total]
+        #osaka_index = ["大阪支店", "大阪営業1課", "大阪営業2課", "大分出張所"]
 
-        for i, total in enumerate(osaka_data):
-            result = result.append({"管理部門": osaka_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
+        #for i, total in enumerate(osaka_data):
+            #result = result.append({"管理部門": osaka_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
 
-        st.write("大阪まとめ:")
-        st.write(result)
+        #st.write("大阪まとめ:")
+        #st.write(result)
 
 
        
