@@ -81,10 +81,12 @@ def main():
         merged = pd.merge(grouped1.reset_index(), grouped2.reset_index(), how="outer", on=["管理部門", "管理部門名", "営業担当コード",])
         merged1 = pd.merge(grouped1.reset_index(), grouped2.reset_index(), how="outer", on=["管理部門", "管理部門名", "営業担当コード",])
 
+
+
         # 営業担当別集計結果に管理部門、管理部門名も追加する
         grouped3 = merged.groupby(["営業担当コード", "営業担当名",]).agg({"売上本体金額": "sum", "売上原価": "sum", "仕入本体金額": "sum", "粗利": "sum"})
 
-        
+  
 
 
         # 集計結果を表示する
@@ -98,8 +100,8 @@ def main():
             st.write(grouped2_total)
 
             # Plotlyで棒グラフを作成
-            #fig_grouped2 = go.Figure(go.Bar(x=grouped2.index, y=grouped2['売上本体金額']))
-            #st.plotly_chart(fig_grouped2)
+            fig_grouped2 = go.Figure(go.Bar(x=grouped2.index, y=grouped2['売上本体金額']))
+            st.plotly_chart(fig_grouped2)
             
         with st.expander("仕入集計結果(商品仕入6)"):
             st.write(grouped1)
@@ -122,13 +124,16 @@ def main():
         total_7 = merged1[(merged1["管理部門"] >= 195000) & (merged1["管理部門"] <= 195199)].agg({"売上本体金額": "sum", "仕入本体金額": "sum", "売上原価": "sum", "粗利": "sum"})
         total_8 = merged1[(merged1["管理部門"] >= 195200) & (merged1["管理部門"] <= 195299)].agg({"売上本体金額": "sum", "仕入本体金額": "sum", "売上原価": "sum", "粗利": "sum"})
        
-
+        # 3カラム表示
+        
         st.write("全社合計:")
         st.write(total_6)
 
+        
+        
         st.write("東京合計:")
         st.write(total_7)
-
+    
         st.write("大阪合計:")
         st.write(total_8)        
 
@@ -141,9 +146,9 @@ def main():
 
         # 集計結果を表示する
         st.write("営業担当別集計:")
-        st.write(grouped3)
+        st.dataframe(grouped3, width=800, height=1000)
 
-
+      
         # 新しいデータフレームを作成
         result = pd.DataFrame(index=["東京支店", "東京営業1課", "東京営業2課", "販売促進課", "海外営業課", "中部営業1課", "中部営業2課"],
                                 columns=["管理部門", "売上本体金額", "仕入本体金額"])
@@ -204,31 +209,31 @@ def main():
         st.write("大阪まとめ:")
         st.write(result1)
 
-        ## 新しいデータフレームを作成
-        #result = pd.DataFrame(columns=["管理部門", "売上本体金額", "仕入本体金額", "売上原価"])
+        # 新しいデータフレームを作成
+        result = pd.DataFrame(columns=["管理部門", "売上本体金額", "仕入本体金額", "売上原価"])
 
-        ## 各データの集計結果を算出
+        # 各データの集計結果を算出
       
 
-        ## 東京データをまとめる
-        #tokyo_data = [tokyo_total, tokyo1_total, tokyo2_total, promotion_total, overseas_total, chu1_total, chu2_total]
-        #tokyo_index = ["東京支店", "東京営業1課", "東京営業2課", "販売促進課", "海外営業課", "中部営業1課", "中部営業2課"]
+        # 東京データをまとめる
+        tokyo_data = [tokyo_total, tokyo1_total, tokyo2_total, promotion_total, overseas_total, chu1_total, chu2_total]
+        tokyo_index = ["東京支店", "東京営業1課", "東京営業2課", "販売促進課", "海外営業課", "中部営業1課", "中部営業2課"]
 
-        #for i, total in enumerate(tokyo_data):
-            #result = result.append({"管理部門": tokyo_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
+        for i, total in enumerate(tokyo_data):
+            result = result.append({"管理部門": tokyo_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
 
-        #st.write("東京まとめ:")
-        #st.write(result)
+        st.write("東京まとめ:")
+        st.dataframe(result, width=600 , height=400)
 
-        ## 大阪データをまとめる
-        #osaka_data = [osaka_total, osaka1_total, osaka2_total, oita_total]
-        #osaka_index = ["大阪支店", "大阪営業1課", "大阪営業2課", "大分出張所"]
+        # 大阪データをまとめる
+        osaka_data = [osaka_total, osaka1_total, osaka2_total, oita_total]
+        osaka_index = ["大阪支店", "大阪営業1課", "大阪営業2課", "大分出張所"]
 
-        #for i, total in enumerate(osaka_data):
-            #result = result.append({"管理部門": osaka_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
+        for i, total in enumerate(osaka_data):
+            result = result.append({"管理部門": osaka_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
 
-        #st.write("大阪まとめ:")
-        #st.write(result)
+        st.write("大阪まとめ:")
+        st.dataframe(result, width=600 , height=500)
 
 
        
