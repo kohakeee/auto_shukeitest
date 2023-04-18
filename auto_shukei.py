@@ -209,31 +209,7 @@ def main():
         st.write("大阪まとめ:")
         st.write(result1)
 
-        # 新しいデータフレームを作成
-        result = pd.DataFrame(columns=["管理部門", "売上本体金額", "仕入本体金額", "売上原価"])
-
-        # 各データの集計結果を算出
-      
-
-        # 東京データをまとめる
-        tokyo_data = [tokyo_total, tokyo1_total, tokyo2_total, promotion_total, overseas_total, chu1_total, chu2_total]
-        tokyo_index = ["東京支店", "東京営業1課", "東京営業2課", "販売促進課", "海外営業課", "中部営業1課", "中部営業2課"]
-
-        for i, total in enumerate(tokyo_data):
-            result = result.append({"管理部門": tokyo_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
-
-        st.write("東京まとめ:")
-        st.dataframe(result, width=600 , height=400)
-
-        # 大阪データをまとめる
-        osaka_data = [osaka_total, osaka1_total, osaka2_total, oita_total]
-        osaka_index = ["大阪支店", "大阪営業1課", "大阪営業2課", "大分出張所"]
-
-        for i, total in enumerate(osaka_data):
-            result = result.append({"管理部門": osaka_index[i], "売上本体金額": total["売上本体金額"], "仕入本体金額": total["仕入本体金額"], "売上原価": total["売上原価"]}, ignore_index=True)
-
-        st.write("大阪まとめ:")
-        st.dataframe(result, width=600 , height=500)
+   
 
 
        
